@@ -4,12 +4,14 @@ import java.util.Set;
 public class ContainsDuplicate {
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10};
-        System.out.println(containsDuplicate(arr));
+
+        int[] arr = {90, 91, 50, 487, 48, 50, 7, 7, 8, 9, 10};
+        System.out.println(containsDuplicate2(arr));
     }
 
 
     public static boolean containsDuplicate(int[] nums) {
+
         if (nums == null || nums.length == 0) {
             return false;
         }
@@ -21,6 +23,31 @@ public class ContainsDuplicate {
                 return true;
             }
         }
+        return false;
+    }
+
+    public static boolean containsDuplicate2(int[] nums) {
+
+        for (int i = 1; i < nums.length; i++) {
+
+            int j = i - 1;
+            int n = nums[i];
+
+
+            while (j >= 0 && nums[j] >= n) {
+
+                if (nums[j] == n) {
+                    return true;
+                }
+
+                nums[j + 1] = nums[j];
+
+                j--;
+            }
+
+            nums[j + 1] = n;
+        }
+
         return false;
     }
 

@@ -1,0 +1,3 @@
+class CarsAndSeats_ToptalTest {
+
+}

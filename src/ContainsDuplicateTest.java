@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ContaininsDuplicateOnArrayTest {
 
     @Test
+    void main() {
+    }
+
+    @Test
     void containsDuplicate() {
 
         ContainsDuplicate containsDuplicate = new ContainsDuplicate();
@@ -16,11 +20,6 @@ class ContaininsDuplicateOnArrayTest {
         assertTrue(testCase1Result);
         assertFalse(testCase2Result);
         assertTrue(testCase3Result);
-
-
     }
 
-    @Test
-    void main() {
-    }
 }

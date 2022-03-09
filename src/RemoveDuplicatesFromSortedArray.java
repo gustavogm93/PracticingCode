@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class RemoveDuplicatesFromSortedArray {
 
@@ -7,20 +10,47 @@ public class RemoveDuplicatesFromSortedArray {
         int[] nums = {7, 2, 3, 6, 1, 8, 2, 8, 1, 6, 4, 2, 13, 12, 9, 18, 102};
         int[] numsPar = {9, 4, 6, 8, 10, 12, 11, 3, 4, 18};
         int[] dplicateNums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        System.out.println(r.removeDuplicateBestSolution(numsPar));
-        System.out.println(Arrays.toString(numsPar));
+        System.out.println(r.sendDuplicatesToBeginArray(dplicateNums));
+    }
+
+    public static Integer mult(int i) {
+        return i * 2;
+    }
+
+    public int sendDuplicatesToBeginArray(int[] nums) {
+        Arrays.sort(nums);
+        int i = nums.length - 1;
+
+        for (int j = nums.length - 2; j > 0; j--) {
+            if (nums[i] != nums[j]) {
+                i--;
+                nums[i] = nums[j];
+            }
+        }
+        int[] numa = nums;
+        numa[2] = 5;
+        System.out.println(Arrays.toString(numa));
+        List<Integer> a = Arrays.stream(nums).map(RemoveDuplicatesFromSortedArray::mult).boxed().collect(toList());
+        // Arrays.sort(numa, Collections.reverseOrder());
+
+        System.out.println(Arrays.toString(nums));
+        return 1;
     }
 
     public int removeDuplicates(int[] nums) {
-        int index = 1;
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] != nums[i + 1]) {
-                nums[index++] = nums[i + 1];
-            }
-
+        if (nums.length == 0) {
+            return 0;
         }
-        System.out.println(index);
-        return index;
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != nums[i]) {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+
+        return i + 1;
     }
 
     public int removeDuplicates2(int[] nums) {
