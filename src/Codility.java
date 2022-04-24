@@ -1,11 +1,12 @@
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Codility {
 
 
     public static void main(String[] args) {
 
-        solution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+        System.out.println(filters(new Integer[]{3, 0, 5}));
 
 
     }
@@ -47,6 +48,38 @@ public class Codility {
         return nextSpace;
     }
 
+
+    public static int filters(Integer[] pollutions) {
+        if (pollutions == null || pollutions.length == 0) {
+            return 0;
+        }
+        double sumOfPollution = Arrays.stream(pollutions).reduce(0, (a, b) -> a + b);
+        double toAchive = sumOfPollution / 2;
+        int filters = 0;
+        //sort pollutions by descending order
+        Arrays.sort(pollutions, Collections.reverseOrder());
+
+        for (int i = 0; i < pollutions.length || toAchive <= 0; i++) {
+            boolean isLastIteration = i == pollutions.length - 1;
+            double res = pollutions[i];
+            int j = i + 1;
+            Double maxVal = Double.valueOf(pollutions[j]);
+            while ((!isLastIteration && res > maxVal)) {
+                res = res / 2;
+                toAchive -= res;
+                filters++;
+                if (toAchive == 0) {
+                    return filters;
+                }
+            }
+        }
+
+        return filters;
+
+
+    }
+
+
     /*
     A group of friends is going on holiday together. They have come to a meeting point (the start of
     the journey) using N cars. There are P[K]
@@ -54,7 +87,17 @@ public class Codility {
 
 
 
+
+
+
+
+
+
+
+
      */
+
+
     // write a function which, given an array of Integers A of Length N, returns the minimum number of filters needed to reduce the total pollution by at least half
     public static int solution(int[] A) {
         //result sum of all numbers in array int
